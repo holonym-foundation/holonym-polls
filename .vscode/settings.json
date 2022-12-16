@@ -1,0 +1,9 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript", "typescript"],
+  "prettier.printWidth": 87,
+  "[javascript, typescript, typescriptreact, json]": {
+    "editor.tabSize": 2
+  }
+}
