@@ -1,14 +1,26 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import testPolls from "../data/testPolls";
 import Header from "../components/Header";
+import type { Poll } from "../types/base";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export async function getStaticProps() {
+  const resp = await fetch("http://localhost:3000/api/polls");
+  const polls = await resp.json();
+  return {
+    props: {
+      polls,
+    },
+  };
+}
+
+export default function Home({ polls }: { polls: Poll[] }) {
   return (
     <>
       <Head>
@@ -20,6 +32,13 @@ export default function Home() {
       <main className={styles.main}>
         <Header />
 
+        <div
+          style={{ padding: "10px", backgroundColor: "#ddd", borderRadius: "10px" }}
+        >
+          <Link href="/create-poll">
+            <h2 className={inter.className}>Create a Poll</h2>
+          </Link>
+        </div>
         <div className={styles.center}>
           <div style={{ textAlign: "center" }}>
             <h2>Popular Polls</h2>
@@ -27,7 +46,7 @@ export default function Home() {
           </div>
 
           <div className={styles.grid}>
-            {testPolls.map((pollData) => (
+            {polls.map((pollData) => (
               <Link
                 key={pollData.id}
                 href={`/polls/${pollData.id}`}
@@ -40,13 +59,6 @@ export default function Home() {
           </div>
 
           <hr style={{ opacity: "0.3" }} />
-        </div>
-        <div
-          style={{ padding: "10px", backgroundColor: "#ddd", borderRadius: "10px" }}
-        >
-          <Link href="/create-poll">
-            <h2 className={inter.className}>Create a Poll</h2>
-          </Link>
         </div>
         <div></div>
         <div>{"<footer>"}</div>

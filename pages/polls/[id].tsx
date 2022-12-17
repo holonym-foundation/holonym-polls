@@ -2,14 +2,27 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "@next/font/google";
-import { useFormik } from "formik";
+import { Formik, Form, useField, useFormikContext } from "formik";
+import * as Yup from "yup";
 import styles from "../../styles/Home.module.css";
 import pageStyles from "../../styles/Polls.module.css";
 import type { Poll } from "../../types/base";
-import FormInput from "../../components/FormInput";
+import PollOption from "../../components/PollOption";
 import Header from "../../components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
+
+type PollValues = {
+  vote: string;
+};
+
+const initialValues = {
+  vote: "",
+};
+
+const validationSchema = Yup.object().shape({
+  vote: Yup.string().required("Required"),
+});
 
 type PollPropsContext = {
   params: {
@@ -43,14 +56,35 @@ export async function getStaticProps(context: PollPropsContext) {
 }
 
 export default function Poll({ poll }: { poll: Poll }) {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  async function onSubmit(
+    values: PollValues,
+    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+  ) {
+    const optNameToNum = Object.fromEntries(
+      Object.entries(poll)
+        .filter((item) => item[0].includes("opt"))
+        .map((item) => [item[1], parseInt(item[0].replace("opt", ""))])
+    );
+
+    const vote = optNameToNum[values.vote];
+    const reqBody = {
+      id: poll.id,
+      option: vote,
+      address: "0x123",
+      signature: "0x456",
+    };
+    const resp = await fetch("http://localhost:3000/api/vote", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reqBody),
+    });
+    const data = await resp.json();
+
+    alert(JSON.stringify({ values, poll, data }, null, 2));
+    setSubmitting(false);
+  }
 
   return (
     <>
@@ -69,25 +103,49 @@ export default function Poll({ poll }: { poll: Poll }) {
           </div>
 
           <div>
-            <form onSubmit={formik.handleSubmit}>
-              <FormInput option={poll.opt1 ?? "Option 1"} inputType="radio" />
-              <FormInput option={poll.opt2 ?? "Option 2"} inputType="radio" />
-              <FormInput option={poll.opt3 ?? "Option 3"} inputType="radio" />
-              <FormInput option={poll.opt4 ?? "Option 4"} inputType="radio" />
-              <div style={{ textAlign: "center" }}>
-                <button
-                  type="submit"
-                  className={pageStyles["create-poll-button"]}
-                  style={{
-                    padding: "10px",
-                    backgroundColor: "#ddd",
-                    borderRadius: "10px",
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            >
+              <Form>
+                <div role="group">
+                  <PollOption
+                    fieldName="opt1"
+                    displayName={poll.opt1 ?? "Option 1"}
+                    numVotes={poll.opt1Votes ?? 0}
+                  />
+                  <PollOption
+                    fieldName="opt2"
+                    displayName={poll.opt2 ?? "Option 2"}
+                    numVotes={poll.opt2Votes ?? 0}
+                  />
+                  <PollOption
+                    fieldName="opt3"
+                    displayName={poll.opt3 ?? "Option 3"}
+                    numVotes={poll.opt3Votes ?? 0}
+                  />
+                  <PollOption
+                    fieldName="opt4"
+                    displayName={poll.opt4 ?? "Option 4"}
+                    numVotes={poll.opt4Votes ?? 0}
+                  />
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <button
+                    type="submit"
+                    className={pageStyles["create-poll-button"]}
+                    style={{
+                      padding: "10px",
+                      backgroundColor: "#ddd",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </Form>
+            </Formik>
           </div>
         </div>
         <div

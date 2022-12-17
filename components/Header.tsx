@@ -5,7 +5,6 @@ import { Inter } from "@next/font/google";
 import { useFormik } from "formik";
 import styles from "../styles/Home.module.css";
 import pageStyles from "../styles/Polls.module.css";
-import FormInput from "../components/FormInput";
 
 const inter = Inter({ subsets: ["latin"] });
 

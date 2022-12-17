@@ -2,23 +2,96 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "@next/font/google";
-import { useFormik } from "formik";
+import { Formik, Form, useField, useFormikContext } from "formik";
+import * as Yup from "yup";
 import styles from "../styles/Home.module.css";
 import pageStyles from "../styles/Polls.module.css";
-import FormInput from "../components/FormInput";
+import PollOption from "../components/PollOption";
 import Header from "../components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
+type CreatePollValues = {
+  caption: string;
+  "Option 1": string;
+  "Option 2": string;
+  "Option 3": string;
+  "Option 4": string;
+};
+
+const initialValues = {
+  caption: "",
+  "Option 1": "",
+  "Option 2": "",
+  "Option 3": "",
+  "Option 4": "",
+};
+
+const validationSchema = Yup.object({
+  caption: Yup.string()
+    .max(100, "Must be 100 characters or less")
+    .required("Required"),
+  "Option 1": Yup.string()
+    .max(25, "Must be 25 characters or less")
+    .required("Required"),
+  "Option 2": Yup.string()
+    .max(25, "Must be 25 characters or less")
+    .required("Required"),
+  "Option 3": Yup.string()
+    .max(25, "Must be 25 characters or less")
+    .required("Required"),
+  "Option 4": Yup.string()
+    .max(25, "Must be 25 characters or less")
+    .required("Required"),
+});
+
+function PollCaptionInput() {
+  const [field, meta] = useField("caption");
+
+  return (
+    <>
+      <div className={pageStyles["poll-input-div"]}>
+        <label htmlFor="text" className={pageStyles["poll-form-label"]}>
+          Caption
+        </label>
+        <input
+          className={pageStyles["poll-form-input"]}
+          id="text"
+          type="text"
+          {...field}
+        />
+        {meta.touched && meta.error ? (
+          <div className={pageStyles.error}>{meta.error}</div>
+        ) : null}
+      </div>
+    </>
+  );
+}
+
 export default function CreatePoll() {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  async function onSubmit(
+    values: CreatePollValues,
+    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+  ) {
+    const reqBody = {
+      caption: values.caption,
+      opt1: values["Option 1"],
+      opt2: values["Option 2"],
+      opt3: values["Option 3"],
+      opt4: values["Option 4"],
+    };
+    const resp = await fetch("/api/polls", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reqBody),
+    });
+    const data = await resp.json();
+
+    alert(JSON.stringify(data, null, 2));
+    setSubmitting(false);
+  }
 
   return (
     <>
@@ -37,38 +110,33 @@ export default function CreatePoll() {
           </div>
 
           <div>
-            <form onSubmit={formik.handleSubmit}>
-              <div className={pageStyles["poll-input-div"]}>
-                <label htmlFor="caption" className={pageStyles["poll-form-label"]}>
-                  Poll Caption
-                </label>
-                <input
-                  className={pageStyles["poll-form-input"]}
-                  id="caption"
-                  name="caption"
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                />
-              </div>
-              <FormInput option="Option 1" inputType="text" />
-              <FormInput option="Option 2" inputType="text" />
-              <FormInput option="Option 3" inputType="text" />
-              <FormInput option="Option 4" inputType="text" />
-              <div style={{ textAlign: "center" }}>
-                <button
-                  type="submit"
-                  className={pageStyles["create-poll-button"]}
-                  style={{
-                    padding: "10px",
-                    backgroundColor: "#ddd",
-                    borderRadius: "10px",
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              // onSubmit={onSubmit}
+              onSubmit={onSubmit}
+            >
+              <Form>
+                <PollCaptionInput />
+                <PollOption fieldName="Option 1" inputType="text" />
+                <PollOption fieldName="Option 2" inputType="text" />
+                <PollOption fieldName="Option 3" inputType="text" />
+                <PollOption fieldName="Option 4" inputType="text" />
+                <div style={{ textAlign: "center" }}>
+                  <button
+                    type="submit"
+                    className={pageStyles["create-poll-button"]}
+                    style={{
+                      padding: "10px",
+                      backgroundColor: "#ddd",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </Form>
+            </Formik>
           </div>
         </div>
         <div
