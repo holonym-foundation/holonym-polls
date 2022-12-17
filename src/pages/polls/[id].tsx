@@ -106,7 +106,7 @@ export default function Poll({ poll }: { poll: Poll }) {
 
         <div className={styles.center}>
           <div style={{ textAlign: "center" }}>
-            <h3>{poll.caption}</h3>
+            <h3 className={defaultFont.className}>{poll.caption}</h3>
           </div>
 
           <div className={defaultFont.className}>
@@ -119,22 +119,22 @@ export default function Poll({ poll }: { poll: Poll }) {
                 <div role="group">
                   <PollOption
                     fieldName="opt1"
-                    displayName={poll.opt1 ?? "Option 1"}
+                    fieldValue={poll.opt1 ?? "Option 1"}
                     numVotes={poll.opt1Total ?? 0}
                   />
                   <PollOption
                     fieldName="opt2"
-                    displayName={poll.opt2 ?? "Option 2"}
+                    fieldValue={poll.opt2 ?? "Option 2"}
                     numVotes={poll.opt2Total ?? 0}
                   />
                   <PollOption
                     fieldName="opt3"
-                    displayName={poll.opt3 ?? "Option 3"}
+                    fieldValue={poll.opt3 ?? "Option 3"}
                     numVotes={poll.opt3Total ?? 0}
                   />
                   <PollOption
                     fieldName="opt4"
-                    displayName={poll.opt4 ?? "Option 4"}
+                    fieldValue={poll.opt4 ?? "Option 4"}
                     numVotes={poll.opt4Total ?? 0}
                   />
                 </div>

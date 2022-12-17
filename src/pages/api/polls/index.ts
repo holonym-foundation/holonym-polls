@@ -41,7 +41,7 @@ async function createPoll(
       opt2Total: 0,
       opt3Total: 0,
       opt4Total: 0,
-      votes: {},
+      voters: {},
     };
     db.data.polls.push(newPoll);
     await db.write();

@@ -15,19 +15,30 @@ type Error = {
   error: string;
 };
 
+function handleGet(req: NextApiRequest, res: NextApiResponse<Poll | Poll[] | Error>) {
+  const { id, includeVoters } = req.query;
+  if (typeof id !== "string") {
+    return res.status(400).json({ error: "Invalid poll id" });
+  }
+  db.read();
+  const poll = db.data?.polls.find((p) => p.id === id);
+  if (!poll) {
+    return res.status(400).json({ error: "Invalid poll id" });
+  }
+  if (includeVoters) {
+    return res.status(200).json(poll);
+  }
+  const pollWithoutVotes = Object.assign({}, poll);
+  delete pollWithoutVotes.votes;
+  return res.status(200).json(poll);
+}
+
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Poll | Poll[] | Error>
 ) {
   if (req.method === "GET") {
-    const { id } = req.query;
-    if (typeof id == "string") {
-      db.read();
-      res.status(200).json(db.data?.polls[parseInt(id)]);
-    } else {
-      res.status(400).json({ error: "Invalid poll id" });
-    }
-  } else {
-    res.status(400).json({ error: "Invalid request method" });
+    return handleGet(req, res);
   }
+  return res.status(400).json({ error: "Invalid request method" });
 }

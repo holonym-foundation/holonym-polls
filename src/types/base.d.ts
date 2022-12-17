@@ -14,5 +14,5 @@ export type Poll = {
   opt2Total: number;
   opt3Total: number;
   opt4Total: number;
-  votes: AddressToVote;
+  voters: AddressToVote;
 };

@@ -2,6 +2,10 @@
 
 TODO:
 
+- Use Holonym styles for
+  - logo
+  - fonts
+  - buttons
 - Add check for whether user is unique (using holonym-api)
 - Add payments. In order to create a poll, user must pay $1.
 - Create Header component that includes the \<Head> data

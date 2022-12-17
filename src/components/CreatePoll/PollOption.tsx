@@ -7,10 +7,10 @@ import { Field, useField } from "formik";
 
 type PollOptionProps = {
   fieldName: string;
-  displayName: string;
+  fieldValue: string;
 };
 
-export default function PollOption({ fieldName, displayName }: PollOptionProps) {
+export default function PollOption({ fieldName, fieldValue }: PollOptionProps) {
   const [field, meta] = useField(fieldName);
 
   return (
@@ -18,7 +18,7 @@ export default function PollOption({ fieldName, displayName }: PollOptionProps) 
       <div className={defaultFont.className}>
         <div className={styles["input-div-create-poll"]}>
           <label htmlFor="text" className={styles["label-create-poll"]}>
-            {displayName}
+            {fieldValue}
           </label>
           <Field
             className={styles["text-input-create-poll"]}

@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { defaultFont } from "shared/fonts";
+import HolonymLogo from "img/Holonym-Logo-W.png";
 import styles from "../styles/Home.module.css";
 import SiweButton from "./SiweButton";
 
@@ -21,15 +22,8 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By Holonym
-            {/* <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              /> */}
+            By
+            <Image src={HolonymLogo} alt="Holonym Logo" width={120} priority />
           </a>
         </div>
         <SiweButton />

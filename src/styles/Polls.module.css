@@ -1,7 +1,7 @@
 .input-div-poll-vote {
   margin: 10px;
   display: grid;
-  grid-template-columns: 250px 150px 50px;
+  grid-template-columns: 250px 50px;
 }
 
 .label-poll-vote {

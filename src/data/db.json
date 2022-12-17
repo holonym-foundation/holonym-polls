@@ -7,11 +7,13 @@
       "opt2": "Joe Biden",
       "opt3": "Kanye West",
       "opt4": "Mike Pence",
-      "opt1Total": 0,
+      "opt1Total": 1,
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {}
+      "voters": {
+        "0x123": 1
+      }
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a01",
@@ -20,7 +22,7 @@
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {}
+      "voters": {}
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a02",
@@ -32,8 +34,10 @@
       "opt1Total": 2,
       "opt2Total": 0,
       "opt3Total": 0,
-      "opt4Total": 1,
-      "votes": {}
+      "opt4Total": 2,
+      "voters": {
+        "0x123": 4
+      }
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a03",
@@ -46,7 +50,7 @@
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {}
+      "voters": {}
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a04",
@@ -59,7 +63,7 @@
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {}
+      "voters": {}
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a05",
@@ -72,7 +76,7 @@
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {}
+      "voters": {}
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a06",
@@ -85,7 +89,7 @@
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {
+      "voters": {
         "0x123": 1
       }
     },
@@ -100,7 +104,7 @@
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {}
+      "voters": {}
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a08",
@@ -113,7 +117,7 @@
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {}
+      "voters": {}
     },
     {
       "id": "0a0a113d-aeca-4e8c-9e86-4afdda9729ad",
@@ -126,7 +130,7 @@
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "votes": {}
+      "voters": {}
     }
   ]
 }

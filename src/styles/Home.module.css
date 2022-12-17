@@ -5,7 +5,6 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-  font-family: var(--font-mono);
 }
 
 .description {
@@ -122,7 +121,7 @@
 
 .thirteen::before,
 .thirteen::after {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
 }

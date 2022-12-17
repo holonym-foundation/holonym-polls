@@ -76,11 +76,11 @@ export default function CreatePoll() {
               onSubmit={onSubmit}
             >
               <Form>
-                <PollOption fieldName="caption" displayName="Caption" />
-                <PollOption fieldName="opt1" displayName="Option 1" />
-                <PollOption fieldName="opt2" displayName="Option 2" />
-                <PollOption fieldName="opt3" displayName="Option 3" />
-                <PollOption fieldName="opt4" displayName="Option 4" />
+                <PollOption fieldName="caption" fieldValue="Caption" />
+                <PollOption fieldName="opt1" fieldValue="Option 1" />
+                <PollOption fieldName="opt2" fieldValue="Option 2" />
+                <PollOption fieldName="opt3" fieldValue="Option 3" />
+                <PollOption fieldName="opt4" fieldValue="Option 4" />
 
                 <div style={{ textAlign: "center" }}>
                   <button type="submit">Submit</button>
