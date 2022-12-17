@@ -1,20 +1,21 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
 import { Inter } from "@next/font/google";
+import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
-import type { Poll } from "../types/base";
+import type { Poll } from "types/base";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export async function getStaticProps() {
+export async function getServerSideProps(context: any) {
   const resp = await fetch("http://localhost:3000/api/polls");
   const polls = await resp.json();
   return {
     props: {
       polls,
+      csrfToken: await getCsrfToken(context),
     },
   };
 }

@@ -2,25 +2,15 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "@next/font/google";
-import { useFormik } from "formik";
 import styles from "../styles/Home.module.css";
-import pageStyles from "../styles/Polls.module.css";
+import SiweButton from "./SiweButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function CreatePoll() {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-
+export default function Header() {
   return (
     <>
-      <div className={styles.description}>
+      <div id="header" className={styles.description}>
         {/* <p>
             Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
@@ -43,7 +33,7 @@ export default function CreatePoll() {
               /> */}
           </a>
         </div>
-        <div></div>
+        <SiweButton />
       </div>
     </>
   );
