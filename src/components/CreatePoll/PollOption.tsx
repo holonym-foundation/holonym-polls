@@ -15,8 +15,6 @@ type PollOptionProps = {
 export default function PollOption({ fieldName, displayName }: PollOptionProps) {
   const [field, meta] = useField(fieldName);
 
-  console.log(field);
-
   return (
     <>
       <div className={styles["input-div-create-poll"]}>

@@ -114,6 +114,19 @@
       "opt3Total": 0,
       "opt4Total": 0,
       "votes": {}
+    },
+    {
+      "id": "0a0a113d-aeca-4e8c-9e86-4afdda9729ad",
+      "caption": "Test poll 456",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Sometimes",
+      "opt4": "I don't know",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {}
     }
   ]
 }

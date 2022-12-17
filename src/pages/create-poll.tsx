@@ -37,29 +37,6 @@ const validationSchema = Yup.object({
   opt4: Yup.string().max(25, "Must be 25 characters or less").required("Required"),
 });
 
-function PollCaptionInput() {
-  const [field, meta] = useField("caption");
-
-  return (
-    <>
-      <div className={pageStyles["input-div-create-poll"]}>
-        <label htmlFor="text" className={pageStyles["label-create-poll"]}>
-          Caption
-        </label>
-        <input
-          className={pageStyles["text-input-create-poll"]}
-          id="text"
-          type="text"
-          {...field}
-        />
-        {meta.touched && meta.error ? (
-          <div className={pageStyles.error}>{meta.error}</div>
-        ) : null}
-      </div>
-    </>
-  );
-}
-
 export default function CreatePoll() {
   async function onSubmit(
     values: CreatePollValues,
