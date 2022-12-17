@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Inter } from "@next/font/google";
+import { defaultFont } from "shared/fonts";
 import { Formik, Form, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styles from "../../styles/Home.module.css";
@@ -10,8 +10,6 @@ import pageStyles from "../../styles/Polls.module.css";
 import type { Poll } from "../../types/base";
 import PollOption from "../../components/Vote/PollOption";
 import Header from "../../components/Header";
-
-const inter = Inter({ subsets: ["latin"] });
 
 type PollValues = {
   vote: string;
@@ -111,7 +109,7 @@ export default function Poll({ poll }: { poll: Poll }) {
             <h3>{poll.caption}</h3>
           </div>
 
-          <div>
+          <div className={defaultFont.className}>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -141,29 +139,15 @@ export default function Poll({ poll }: { poll: Poll }) {
                   />
                 </div>
                 <div style={{ textAlign: "center" }}>
-                  <button
-                    type="submit"
-                    className={pageStyles["button-create-poll"]}
-                    style={{
-                      padding: "10px",
-                      backgroundColor: "#ddd",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    Submit
-                  </button>
+                  <button type="submit">Submit</button>
                 </div>
               </Form>
             </Formik>
           </div>
         </div>
-        <div
-          style={{ padding: "10px", backgroundColor: "#ddd", borderRadius: "10px" }}
-        >
-          <Link href="/">
-            <h2 className={inter.className}>Back</h2>
-          </Link>
-        </div>
+        <Link href="/">
+          <button className={defaultFont.className}>Back</button>
+        </Link>
         <div></div>
         <div></div>
       </main>

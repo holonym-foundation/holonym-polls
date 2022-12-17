@@ -1,15 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "@next/font/google";
+import { defaultFont } from "shared/fonts";
 import { Formik, Form, Field, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styles from "../styles/Home.module.css";
 import pageStyles from "../styles/Polls.module.css";
 import Header from "../components/Header";
 import PollOption from "../components/CreatePoll/PollOption";
-
-const inter = Inter({ subsets: ["latin"] });
 
 type CreatePollValues = {
   caption: string;
@@ -71,7 +69,7 @@ export default function CreatePoll() {
             <h2>Create Poll</h2>
           </div>
 
-          <div>
+          <div className={defaultFont.className}>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -85,29 +83,15 @@ export default function CreatePoll() {
                 <PollOption fieldName="opt4" displayName="Option 4" />
 
                 <div style={{ textAlign: "center" }}>
-                  <button
-                    type="submit"
-                    className={pageStyles["button-create-poll"]}
-                    style={{
-                      padding: "10px",
-                      backgroundColor: "#ddd",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    Submit
-                  </button>
+                  <button type="submit">Submit</button>
                 </div>
               </Form>
             </Formik>
           </div>
         </div>
-        <div
-          style={{ padding: "10px", backgroundColor: "#ddd", borderRadius: "10px" }}
-        >
-          <Link href="/">
-            <h2 className={inter.className}>Back</h2>
-          </Link>
-        </div>
+        <Link href="/">
+          <button className={defaultFont.className}>Back</button>
+        </Link>
         <div></div>
         <div></div>
       </main>

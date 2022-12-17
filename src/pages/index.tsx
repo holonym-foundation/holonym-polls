@@ -1,13 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { Inter } from "@next/font/google";
 import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import styles from "../styles/Home.module.css";
+import { defaultFont } from "../shared/fonts";
 import Header from "../components/Header";
 import type { Poll } from "types/base";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export async function getServerSideProps(context: any) {
   const resp = await fetch("http://localhost:3000/api/polls");
@@ -32,11 +30,9 @@ export default function Home({ polls }: { polls: Poll[] }) {
       <main className={styles.main}>
         <Header />
 
-        <div
-          style={{ padding: "10px", backgroundColor: "#ddd", borderRadius: "10px" }}
-        >
+        <div>
           <Link href="/create-poll">
-            <h2 className={inter.className}>Create a Poll</h2>
+            <button className={defaultFont.className}>Create a poll</button>
           </Link>
         </div>
         <div className={styles.center}>
@@ -53,7 +49,7 @@ export default function Home({ polls }: { polls: Poll[] }) {
                 className={styles.card}
                 rel="noopener noreferrer"
               >
-                <h3 className={inter.className}>{pollData.caption}</h3>
+                <h3 className={defaultFont.className}>{pollData.caption}</h3>
               </Link>
             ))}
           </div>

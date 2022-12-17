@@ -1,13 +1,16 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono",
+    "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255; */
+  /* #01010C */
+  --background-start-rgb: 1, 1, 13;
+  --background-end-rgb: 1, 1, 32;
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -17,10 +20,7 @@
     #0071ff33 160deg,
     transparent 360deg
   );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
+  --secondary-glow: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
 
   --tile-start-rgb: 239, 245, 249;
   --tile-end-rgb: 228, 232, 233;
@@ -83,15 +83,12 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  color: #fff;
 }
 
 body {
   color: rbg(--foreground-rgb);
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
 
@@ -104,4 +101,26 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+button {
+  background-color: #0070c9; /* Set the background color to a blue color that complements the dark blue background */
+  border: none; /* Remove the border */
+  border-radius: 50px; /* Round the corners of the button */
+  color: white; /* Make the text white */
+  padding: 15px 32px; /* Add some padding to the button */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove the text decoration */
+  display: inline-block; /* Display the button as an inline block element */
+  font-size: 16px; /* Set the font size to 16px */
+  margin: 4px 2px; /* Add some margin to the button */
+  cursor: pointer; /* Add a pointer cursor on hover */
+  -webkit-transition-duration: 0.4s; /* Add a transition effect when the button is hovered over */
+  transition-duration: 0.4s; /* Add a transition effect when the button is hovered over */
+}
+
+/* Add a hover effect to the button */
+button:hover {
+  background-color: #0056a3; /* Change the background color to a darker blue when hovered over */
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); /* Add a shadow effect to the button when hovered over */
 }
