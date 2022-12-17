@@ -146,7 +146,7 @@ export default function Poll({ poll }: { poll: Poll }) {
           </div>
         </div>
         <Link href="/">
-          <button className={defaultFont.className}>Back</button>
+          <button className={`${defaultFont.className} secondary-button`}>Back</button>
         </Link>
         <div></div>
         <div></div>

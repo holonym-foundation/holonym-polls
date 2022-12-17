@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { defaultFont } from "shared/fonts";
 import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import { SiweMessage } from "siwe";
@@ -9,7 +10,6 @@ import {
   useSignMessage,
 } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
-import { useEffect, useState } from "react";
 
 type ButtonText = "Connect wallet" | "Sign in" | "Disconnect";
 
@@ -82,7 +82,7 @@ export default function SiweButton() {
   return (
     <>
       <button
-        className={defaultFont.className}
+        className={`${defaultFont.className} secondary-button`}
         onClick={(e) => {
           e.preventDefault();
           if (!isConnected) {

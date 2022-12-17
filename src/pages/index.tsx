@@ -37,7 +37,9 @@ export default function Home({ polls }: { polls: Poll[] }) {
         </div>
         <div className={styles.center}>
           <div style={{ textAlign: "center" }}>
-            <h2>Popular Polls</h2>
+            <h2 style={{ margin: "10px" }} className={defaultFont.className}>
+              Popular Polls
+            </h2>
             <hr style={{ opacity: "0.3" }} />
           </div>
 
