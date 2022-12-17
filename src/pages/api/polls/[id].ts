@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Poll } from "../../../types/base";
-import testPolls from "../../../data/testPolls";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { LowSync, JSONFileSync } from "lowdb";

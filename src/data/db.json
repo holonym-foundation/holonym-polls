@@ -1,0 +1,119 @@
+{
+  "polls": [
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a0f",
+      "caption": "2024 US Presidential Election",
+      "opt1": "Donald Trump",
+      "opt2": "Joe Biden",
+      "opt3": "Kanye West",
+      "opt4": "Mike Pence",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {}
+    },
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a01",
+      "caption": "Uniswap proposal #n",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {}
+    },
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a02",
+      "caption": "Is Aristotle better than Plato?",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Sometimes",
+      "opt4": "I don't know",
+      "opt1Total": 2,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 1,
+      "votes": {}
+    },
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a03",
+      "caption": "Short caption",
+      "opt1": "This option is also wayyy too ",
+      "opt2": "No",
+      "opt3": "Sometimes",
+      "opt4": "I don't know",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {}
+    },
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a04",
+      "caption": "Is SBF insane?",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Sometimes",
+      "opt4": "I don't know",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {}
+    },
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a05",
+      "caption": "Is Joker a good movie?",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Kind of",
+      "opt4": "I don't know",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {}
+    },
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a06",
+      "caption": "Is Joker a good movie?",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Kind of",
+      "opt4": "I don't know",
+      "opt1Total": 3,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {
+        "0x123": 1
+      }
+    },
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a07",
+      "caption": "Is Joker a good movie?",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Kind of",
+      "opt4": "I don't know",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {}
+    },
+    {
+      "id": "6cd35d1c-12e7-4794-a329-200bb5168a08",
+      "caption": "Test poll 123",
+      "opt1": "I like this poll",
+      "opt2": "I do not like this poll",
+      "opt3": "This is a funny option",
+      "opt4": "This is the last option",
+      "opt1Total": 1,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "votes": {}
+    }
+  ]
+}

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import testPolls from "../data/testPolls";
 import Header from "../components/Header";
 import type { Poll } from "../types/base";
 

@@ -40,10 +40,16 @@ export default async function handler(
     if (!poll) {
       return res.status(404).json({ error: "Poll not found" });
     }
+    if (poll.votes[address]) {
+      return res
+        .status(400)
+        .json({ error: "This address has already voted in this poll" });
+    }
 
     // NOTE: While using a file for a database, this will result in race conditions.
     //       In a production environment, a database should be used instead.
-    poll[`opt${option}Votes`] += 1;
+    poll[`opt${option}Total`] += 1;
+    poll.votes[address] = option;
     await db.write();
 
     res.status(200).json(poll);

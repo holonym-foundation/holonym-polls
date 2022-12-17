@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Inter } from "@next/font/google";
 import { Formik, Form, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
@@ -56,6 +57,13 @@ export async function getStaticProps(context: PollPropsContext) {
 }
 
 export default function Poll({ poll }: { poll: Poll }) {
+  const router = useRouter();
+  const refreshData = () => {
+    console.log("refreshing");
+    router.replace(router.asPath);
+    console.log("refreshed");
+  };
+
   async function onSubmit(
     values: PollValues,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
@@ -82,7 +90,8 @@ export default function Poll({ poll }: { poll: Poll }) {
     });
     const data = await resp.json();
 
-    alert(JSON.stringify({ values, poll, data }, null, 2));
+    refreshData();
+    alert(JSON.stringify({ values, data }, null, 2));
     setSubmitting(false);
   }
 
@@ -113,22 +122,22 @@ export default function Poll({ poll }: { poll: Poll }) {
                   <PollOption
                     fieldName="opt1"
                     displayName={poll.opt1 ?? "Option 1"}
-                    numVotes={poll.opt1Votes ?? 0}
+                    numVotes={poll.opt1Total ?? 0}
                   />
                   <PollOption
                     fieldName="opt2"
                     displayName={poll.opt2 ?? "Option 2"}
-                    numVotes={poll.opt2Votes ?? 0}
+                    numVotes={poll.opt2Total ?? 0}
                   />
                   <PollOption
                     fieldName="opt3"
                     displayName={poll.opt3 ?? "Option 3"}
-                    numVotes={poll.opt3Votes ?? 0}
+                    numVotes={poll.opt3Total ?? 0}
                   />
                   <PollOption
                     fieldName="opt4"
                     displayName={poll.opt4 ?? "Option 4"}
-                    numVotes={poll.opt4Votes ?? 0}
+                    numVotes={poll.opt4Total ?? 0}
                   />
                 </div>
                 <div style={{ textAlign: "center" }}>
