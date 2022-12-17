@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import styles from "../../styles/Home.module.css";
 import pageStyles from "../../styles/Polls.module.css";
 import type { Poll } from "../../types/base";
-import PollOption from "../../components/PollOption";
+import PollOption from "../../components/Vote/PollOption";
 import Header from "../../components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -134,7 +134,7 @@ export default function Poll({ poll }: { poll: Poll }) {
                 <div style={{ textAlign: "center" }}>
                   <button
                     type="submit"
-                    className={pageStyles["create-poll-button"]}
+                    className={pageStyles["button-create-poll"]}
                     style={{
                       padding: "10px",
                       backgroundColor: "#ddd",

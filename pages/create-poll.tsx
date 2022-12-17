@@ -2,47 +2,39 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "@next/font/google";
-import { Formik, Form, useField, useFormikContext } from "formik";
+import { Formik, Form, Field, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styles from "../styles/Home.module.css";
 import pageStyles from "../styles/Polls.module.css";
-import PollOption from "../components/PollOption";
 import Header from "../components/Header";
+import PollOption from "../components/CreatePoll/PollOption";
 
 const inter = Inter({ subsets: ["latin"] });
 
 type CreatePollValues = {
   caption: string;
-  "Option 1": string;
-  "Option 2": string;
-  "Option 3": string;
-  "Option 4": string;
+  opt1: string;
+  opt2: string;
+  opt3: string;
+  opt4: string;
 };
 
 const initialValues = {
   caption: "",
-  "Option 1": "",
-  "Option 2": "",
-  "Option 3": "",
-  "Option 4": "",
+  opt1: "",
+  opt2: "",
+  opt3: "",
+  opt4: "",
 };
 
 const validationSchema = Yup.object({
   caption: Yup.string()
     .max(100, "Must be 100 characters or less")
     .required("Required"),
-  "Option 1": Yup.string()
-    .max(25, "Must be 25 characters or less")
-    .required("Required"),
-  "Option 2": Yup.string()
-    .max(25, "Must be 25 characters or less")
-    .required("Required"),
-  "Option 3": Yup.string()
-    .max(25, "Must be 25 characters or less")
-    .required("Required"),
-  "Option 4": Yup.string()
-    .max(25, "Must be 25 characters or less")
-    .required("Required"),
+  opt1: Yup.string().max(25, "Must be 25 characters or less").required("Required"),
+  opt2: Yup.string().max(25, "Must be 25 characters or less").required("Required"),
+  opt3: Yup.string().max(25, "Must be 25 characters or less").required("Required"),
+  opt4: Yup.string().max(25, "Must be 25 characters or less").required("Required"),
 });
 
 function PollCaptionInput() {
@@ -50,12 +42,12 @@ function PollCaptionInput() {
 
   return (
     <>
-      <div className={pageStyles["poll-input-div"]}>
-        <label htmlFor="text" className={pageStyles["poll-form-label"]}>
+      <div className={pageStyles["input-div-create-poll"]}>
+        <label htmlFor="text" className={pageStyles["label-create-poll"]}>
           Caption
         </label>
         <input
-          className={pageStyles["poll-form-input"]}
+          className={pageStyles["text-input-create-poll"]}
           id="text"
           type="text"
           {...field}
@@ -73,19 +65,12 @@ export default function CreatePoll() {
     values: CreatePollValues,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) {
-    const reqBody = {
-      caption: values.caption,
-      opt1: values["Option 1"],
-      opt2: values["Option 2"],
-      opt3: values["Option 3"],
-      opt4: values["Option 4"],
-    };
-    const resp = await fetch("/api/polls", {
+    const resp = await fetch("http://localhost:3000/api/polls", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(reqBody),
+      body: JSON.stringify(values),
     });
     const data = await resp.json();
 
@@ -113,19 +98,19 @@ export default function CreatePoll() {
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
-              // onSubmit={onSubmit}
               onSubmit={onSubmit}
             >
               <Form>
-                <PollCaptionInput />
-                <PollOption fieldName="Option 1" inputType="text" />
-                <PollOption fieldName="Option 2" inputType="text" />
-                <PollOption fieldName="Option 3" inputType="text" />
-                <PollOption fieldName="Option 4" inputType="text" />
+                <PollOption fieldName="caption" displayName="Caption" />
+                <PollOption fieldName="opt1" displayName="Option 1" />
+                <PollOption fieldName="opt2" displayName="Option 2" />
+                <PollOption fieldName="opt3" displayName="Option 3" />
+                <PollOption fieldName="opt4" displayName="Option 4" />
+
                 <div style={{ textAlign: "center" }}>
                   <button
                     type="submit"
-                    className={pageStyles["create-poll-button"]}
+                    className={pageStyles["button-create-poll"]}
                     style={{
                       padding: "10px",
                       backgroundColor: "#ddd",
