@@ -1,3 +1,7 @@
+# Sybil-Resistant Polls
+
+Demo app showcasing how Holonym can be used for Sybil-resistant polls.
+
 ## TODOs
 
 TODO:
@@ -5,7 +9,6 @@ TODO:
 - Use Holonym favicon
 - Add check for whether user is unique (using holonym-api)
 - Add payments. In order to create a poll, user must pay $1.
-- Create Header component that includes the \<Head> data
 - Change Poll schema. Instead of using "opt1", "opt2", etc., use an array, like the
   following. Then use index to determine option number.
 
@@ -20,7 +23,7 @@ TODO:
         }
       ]
 
-# README
+# Next.js stuff
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
