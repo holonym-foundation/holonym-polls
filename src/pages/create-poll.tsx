@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { defaultFont } from "shared/fonts";
 import { Formik, Form, Field, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styles from "../styles/Home.module.css";
@@ -66,10 +65,10 @@ export default function CreatePoll() {
 
         <div className={styles.center}>
           <div style={{ textAlign: "center" }}>
-            <h2>Create Poll</h2>
+            <h2 className="header-text">Create Poll</h2>
           </div>
 
-          <div className={defaultFont.className}>
+          <div>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -90,7 +89,7 @@ export default function CreatePoll() {
           </div>
         </div>
         <Link href="/">
-          <button className={`${defaultFont.className} secondary-button`}>Back</button>
+          <button className="secondary-button">Back</button>
         </Link>
         <div></div>
         <div></div>

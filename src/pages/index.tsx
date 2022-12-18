@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import styles from "../styles/Home.module.css";
-import { defaultFont } from "../shared/fonts";
 import Header from "../components/Header";
 import type { Poll } from "types/base";
 
@@ -32,12 +31,12 @@ export default function Home({ polls }: { polls: Poll[] }) {
 
         <div>
           <Link href="/create-poll">
-            <button className={defaultFont.className}>Create a poll</button>
+            <button>Create a poll</button>
           </Link>
         </div>
         <div className={styles.center}>
           <div style={{ textAlign: "center" }}>
-            <h2 style={{ margin: "10px" }} className={defaultFont.className}>
+            <h2 style={{ margin: "10px" }} className="header-text">
               Popular Polls
             </h2>
             <hr style={{ opacity: "0.3" }} />
@@ -51,7 +50,7 @@ export default function Home({ polls }: { polls: Poll[] }) {
                 className={styles.card}
                 rel="noopener noreferrer"
               >
-                <h3 className={defaultFont.className}>{pollData.caption}</h3>
+                <h3>{pollData.caption}</h3>
               </Link>
             ))}
           </div>

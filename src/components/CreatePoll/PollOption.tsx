@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { defaultFont } from "shared/fonts";
 import styles from "../../styles/Polls.module.css";
 import { Field, useField } from "formik";
 
@@ -15,24 +14,18 @@ export default function PollOption({ fieldName, fieldValue }: PollOptionProps) {
 
   return (
     <>
-      <div className={defaultFont.className}>
+      <div>
         <div className={styles["input-div-create-poll"]}>
           <label htmlFor="text" className={styles["label-create-poll"]}>
             {fieldValue}
           </label>
           <Field
-            className={styles["text-input-create-poll"]}
+            className={`${styles["text-input-create-poll"]} text-field`}
             id={fieldName}
             type="text"
             {...field}
             // value={field.value}
           />
-          {/* <input
-          className={styles["text-input-poll-vote"]}
-          id={fieldName}
-          type={inputType}
-          {...field}
-        /> */}
         </div>
       </div>
     </>

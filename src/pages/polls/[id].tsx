@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { defaultFont } from "shared/fonts";
 import { Formik, Form, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styles from "../../styles/Home.module.css";
@@ -106,10 +105,10 @@ export default function Poll({ poll }: { poll: Poll }) {
 
         <div className={styles.center}>
           <div style={{ textAlign: "center" }}>
-            <h3 className={defaultFont.className}>{poll.caption}</h3>
+            <h3>{poll.caption}</h3>
           </div>
 
-          <div className={defaultFont.className}>
+          <div>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -146,7 +145,7 @@ export default function Poll({ poll }: { poll: Poll }) {
           </div>
         </div>
         <Link href="/">
-          <button className={`${defaultFont.className} secondary-button`}>Back</button>
+          <button className="secondary-button">Back</button>
         </Link>
         <div></div>
         <div></div>

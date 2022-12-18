@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { defaultFont } from "shared/fonts";
 import HolonymLogo from "img/Holonym-Logo-W.png";
 import styles from "../styles/Home.module.css";
 import SiweButton from "./SiweButton";
@@ -15,9 +14,8 @@ export default function Header() {
             <code className={styles.code}>pages/index.tsx</code>
           </p> */}
         <div>
-          <h1 className={defaultFont.className}>Sybil-Resistant Polls</h1>
+          <h1 className="header-text">Sybil-Resistant Polls</h1>
           <a
-            className={defaultFont.className}
             href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"

@@ -23,11 +23,12 @@
 .input-div-create-poll {
   margin: 10px;
   display: grid;
-  grid-template-columns: 250px 150px;
+  grid-template-columns: 100px 350px;
 }
 
 .label-create-poll {
   margin: 10px;
+  padding: 15px 0px;
   grid-column: 1;
 }
 
@@ -36,11 +37,3 @@
   width: 100%;
   grid-column: 2;
 }
-/* 
-.button-create-poll {
-  cursor: pointer;
-  padding: 10px;
-  background-color: #ddd;
-  border-radius: 10px;
-  width: 100px;
-} */

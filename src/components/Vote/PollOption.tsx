@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { defaultFont } from "shared/fonts";
 import { Field, useField } from "formik";
 import classNames from "classnames";
 import styles from "../../styles/Polls.module.css";
@@ -22,19 +21,17 @@ export default function PollOption({
   // console.log(field);
 
   const buttonClasses = classNames({
-    [defaultFont.className]: true,
     "poll-button": true,
     "poll-button-selected": field.value === fieldValue,
   });
 
   return (
     <>
-      <div className={defaultFont.className}>
-        <div className={styles["input-div-poll-vote"]}>
-          <div className={buttonClasses} onClick={() => helpers.setValue(fieldValue)}>
-            {fieldValue}
-          </div>
-          {/* <label htmlFor="text" className={styles["label-poll-vote"]}>
+      <div className={styles["input-div-poll-vote"]}>
+        <div className={buttonClasses} onClick={() => helpers.setValue(fieldValue)}>
+          {fieldValue}
+        </div>
+        {/* <label htmlFor="text" className={styles["label-poll-vote"]}>
             <Field
               style={{ display: "none" }}
               // className={styles["text-input-poll-vote"]}
@@ -45,10 +42,7 @@ export default function PollOption({
             />
             {fieldValue}
           </label> */}
-          <span className={`${styles["span-poll-vote"]} ${defaultFont.className}`}>
-            {numVotes}
-          </span>
-        </div>
+        <span className={`${styles["span-poll-vote"]}`}>{numVotes}</span>
       </div>
     </>
   );
