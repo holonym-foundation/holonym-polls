@@ -6,9 +6,10 @@ Demo app showcasing how Holonym can be used for Sybil-resistant polls.
 
 TODO:
 
-- Use Holonym favicon
 - Add check for whether user is unique (using holonym-api)
 - Add payments. In order to create a poll, user must pay $1.
+- Display success message modal with link to poll once poll is submitted
+- Double check Yup form validation to make sure it's accurate
 - Change Poll schema. Instead of using "opt1", "opt2", etc., use an array, like the
   following. Then use index to determine option number.
 

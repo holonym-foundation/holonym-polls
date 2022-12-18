@@ -4,7 +4,9 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { LowSync, JSONFileSync } from "lowdb";
 import { v4 as uuidv4 } from "uuid";
+import sanitizeHtml from "sanitize-html";
 import type { Poll } from "../../../types/base";
+import { MAX_CAPTION_LENGTH, MAX_OPTION_STR_LENGTH } from "constants/misc";
 
 type Error = {
   error: string;
@@ -28,15 +30,32 @@ async function createPoll(
 
   const { caption, opt1, opt2, opt3, opt4 } = req.body;
   if (caption && opt1 && opt2 && opt3 && opt4) {
-    // TODO: Validate poll data (e.g., value lengths)
+    const sanitizedCaption = sanitizeHtml(caption);
+    const sanitizedOpt1 = sanitizeHtml(opt1);
+    const sanitizedOpt2 = sanitizeHtml(opt2);
+    const sanitizedOpt3 = sanitizeHtml(opt3);
+    const sanitizedOpt4 = sanitizeHtml(opt4);
+
+    if (
+      sanitizedCaption.length > MAX_CAPTION_LENGTH ||
+      sanitizedOpt1.length > MAX_OPTION_STR_LENGTH ||
+      sanitizedOpt2.length > MAX_OPTION_STR_LENGTH ||
+      sanitizedOpt3.length > MAX_OPTION_STR_LENGTH ||
+      sanitizedOpt4.length > MAX_OPTION_STR_LENGTH
+    ) {
+      console.log(
+        "Invalid poll data. Caption or option string too long. Returning 400."
+      );
+      return res.status(400).json({ error: "Invalid poll data" });
+    }
 
     const newPoll: Poll = {
       id: uuidv4(),
-      caption,
-      opt1,
-      opt2,
-      opt3,
-      opt4,
+      caption: sanitizedCaption,
+      opt1: sanitizedOpt1,
+      opt2: sanitizedOpt2,
+      opt3: sanitizedOpt3,
+      opt4: sanitizedOpt4,
       opt1Total: 0,
       opt2Total: 0,
       opt3Total: 0,
@@ -59,7 +78,7 @@ export default async function handler(
     db.read();
     res.status(200).json(db.data?.polls ?? []);
   } else if (req.method === "POST") {
-    await createPoll(req, res);
+    return await createPoll(req, res);
   } else {
     res.status(400).json({ error: "Invalid request method" });
   }

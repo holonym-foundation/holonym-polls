@@ -48,6 +48,7 @@ export default async function handler(
 
     // NOTE: While using a file for a database, this will result in race conditions.
     //       In a production environment, a database should be used instead.
+    // TODO: We might need to sanitize option once we start using a real database
     poll[`opt${option}Total`] += 1;
     poll.voters[address] = option;
     await db.write();

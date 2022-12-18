@@ -36,7 +36,13 @@ const validationSchema = Yup.object({
 export default function CreatePoll() {
   async function onSubmit(
     values: CreatePollValues,
-    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+    {
+      setSubmitting,
+      resetForm,
+    }: {
+      setSubmitting: (isSubmitting: boolean) => void;
+      resetForm: (nextState: CreatePollValues) => void;
+    }
   ) {
     const resp = await fetch("http://localhost:3000/api/polls", {
       method: "POST",
@@ -49,6 +55,7 @@ export default function CreatePoll() {
 
     alert(JSON.stringify(data, null, 2));
     setSubmitting(false);
+    resetForm(initialValues);
   }
 
   return (

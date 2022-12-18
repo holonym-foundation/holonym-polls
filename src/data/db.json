@@ -72,11 +72,13 @@
       "opt2": "No",
       "opt3": "Kind of",
       "opt4": "I don't know",
-      "opt1Total": 0,
+      "opt1Total": 1,
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "voters": {}
+      "voters": {
+        "0x123": 1
+      }
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a06",
