@@ -11,6 +11,10 @@ import {
 } from "wagmi";
 import { optimism } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import styles from "../styles/Home.module.css";
+import SiteHead from "components/SiteHead";
+import Navbar from "components/Navbar";
+import Footer from "components/Footer";
 
 export const { chains, provider } = configureChains([optimism], [publicProvider()]);
 
@@ -23,7 +27,13 @@ export default function App({ Component, pageProps }: AppProps<{ session: Sessio
   return (
     <WagmiConfig client={wagmiClient}>
       <SessionProvider session={pageProps.session}>
-        <Component {...pageProps} />
+        <SiteHead />
+        <main className={styles.main}>
+          <Navbar />
+
+          <Component {...pageProps} />
+          <Footer />
+        </main>
       </SessionProvider>
     </WagmiConfig>
   );

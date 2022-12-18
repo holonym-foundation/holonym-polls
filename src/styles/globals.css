@@ -85,7 +85,7 @@ body {
   overflow-x: hidden;
   color: #fff;
   font-family: sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 body {
@@ -149,35 +149,44 @@ button:hover {
 
 /* Add a hover effect to the button */
 .secondary-button:hover {
-  background-color: #c6c6da; /* Change the background color to a darker blue when hovered over */
+  background-color: #c6c0da; /* Change the background color to a darker blue when hovered over */
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19); /* Add a shadow effect to the button when hovered over */
 }
 
 .poll-button {
   /* Style the button container */
   display: inline-block;
-  border: 1px solid #0070c9;
   border-radius: 4px;
-  background-color: #0070c9;
-  color: #fff;
+  /* border: 1px solid #0070c9;
+  background-color: #0070c9; */
+  border: 1px solid #e6e6fa;
+  background-color: #e6e6fa;
+  /* color: #fff; */
+  color: #000;
   text-align: center;
   padding: 8px 16px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 .poll-button:hover {
-  background-color: #0056a3;
-  border-color: #0056a3;
+  /* background-color: #0056a3;
+  border-color: #0056a3; */
+  background-color: #c6c0da;
+  border-color: #c6c0da;
 }
 /* Style the active state */
 .poll-button:active {
-  background-color: #003683;
-  border-color: #003683;
+  /* background-color: #003683;
+  border-color: #003683; */
+  background-color: #a6a0ba;
+  border-color: #a6a0ba;
   transform: scale(0.95);
 }
 .poll-button-selected {
-  background-color: #003683;
-  border-color: #003683;
+  /* background-color: #003683;
+  border-color: #003683; */
+  background-color: #a6a0ba;
+  border-color: #a6a0ba;
   transform: scale(0.95);
 }
 
@@ -203,6 +212,32 @@ button:hover {
 
 .text-field:focus {
   border-color: #ff9190;
+}
+
+.navbar {
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  font-size: 0.85rem;
+  max-width: var(--max-width);
+  width: 100%;
+  z-index: 2;
+}
+
+.navbar a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar p {
+  position: relative;
+  margin: 0;
+  padding: 1rem;
+  background-color: rgba(var(--callout-rgb), 0.5);
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  border-radius: var(--border-radius);
 }
 
 @font-face {

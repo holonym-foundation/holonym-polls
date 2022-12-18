@@ -1,11 +1,10 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Formik, Form, Field, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styles from "../styles/Home.module.css";
 import pageStyles from "../styles/Polls.module.css";
-import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 import PollOption from "../components/CreatePoll/PollOption";
 
 type CreatePollValues = {
@@ -54,46 +53,36 @@ export default function CreatePoll() {
 
   return (
     <>
-      <Head>
-        <title>Holonym Polls</title>
-        <meta name="description" content="Create Sybil resistant polls with Holonym" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={styles.main}>
-        <Header />
-
-        <div className={styles.center}>
-          <div style={{ textAlign: "center" }}>
-            <h2 className="header-text">Create Poll</h2>
-          </div>
-
-          <div>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              <Form>
-                <PollOption fieldName="caption" fieldValue="Caption" />
-                <PollOption fieldName="opt1" fieldValue="Option 1" />
-                <PollOption fieldName="opt2" fieldValue="Option 2" />
-                <PollOption fieldName="opt3" fieldValue="Option 3" />
-                <PollOption fieldName="opt4" fieldValue="Option 4" />
-
-                <div style={{ textAlign: "center" }}>
-                  <button type="submit">Submit</button>
-                </div>
-              </Form>
-            </Formik>
-          </div>
+      <div className={styles.center}>
+        <div style={{ textAlign: "center" }}>
+          <h2 className="header-text">Create Poll</h2>
         </div>
-        <Link href="/">
-          <button className="secondary-button">Back</button>
-        </Link>
-        <div></div>
-        <div></div>
-      </main>
+
+        <div>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+          >
+            <Form>
+              <PollOption fieldName="caption" fieldValue="Caption" />
+              <PollOption fieldName="opt1" fieldValue="Option 1" />
+              <PollOption fieldName="opt2" fieldValue="Option 2" />
+              <PollOption fieldName="opt3" fieldValue="Option 3" />
+              <PollOption fieldName="opt4" fieldValue="Option 4" />
+
+              <div style={{ textAlign: "center" }}>
+                <button type="submit">Submit</button>
+              </div>
+            </Form>
+          </Formik>
+        </div>
+      </div>
+      <Link href="/">
+        <button className="secondary-button">Back</button>
+      </Link>
+      <div></div>
+      <div></div>
     </>
   );
 }
