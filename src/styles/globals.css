@@ -206,6 +206,10 @@ button:hover {
   border-color: #ff9190;
 }
 
+.ReactModal__Overlay {
+  z-index: 1000;
+}
+
 .navbar {
   display: inherit;
   justify-content: inherit;

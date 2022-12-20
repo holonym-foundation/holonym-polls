@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-import {
-  Formik,
-  Form,
-  Field,
-  useField,
-  useFormikContext,
-  FormikHelpers,
-} from "formik";
+import { useState, useEffect } from "react";
+import { Formik, Form, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { ethers } from "ethers";
 import {
@@ -17,10 +10,10 @@ import {
   useSendTransaction,
   usePrepareSendTransaction,
 } from "wagmi";
-import styles from "../styles/Home.module.css";
-import pageStyles from "../styles/Polls.module.css";
-import Navbar from "../components/Navbar";
-import PollOption from "../components/CreatePoll/PollOption";
+import styles from "styles/Home.module.css";
+import PollOption from "components/CreatePoll/PollOption";
+import SuccessModal from "components/CreatePoll/SuccessModal";
+import SubmittingModal from "components/CreatePoll/SubmittingModal";
 
 type CreatePollValues = {
   caption: string;
@@ -49,6 +42,8 @@ const validationSchema = Yup.object({
 });
 
 function useCreatePoll() {
+  const [successModalVisible, setSuccessModalVisible] = useState<boolean>(false);
+  const [pollId, setPollId] = useState<string>("");
   const { chain } = useNetwork();
   const { switchNetworkAsync } = useSwitchNetwork();
   const { config } = usePrepareSendTransaction({
@@ -62,6 +57,10 @@ function useCreatePoll() {
   const { sendTransactionAsync } = useSendTransaction(config);
 
   return {
+    successModalVisible,
+    setSuccessModalVisible,
+    pollId,
+    setPollId,
     chain,
     switchNetworkAsync,
     sendTransactionAsync,
@@ -69,13 +68,24 @@ function useCreatePoll() {
 }
 
 export default function CreatePoll() {
-  const { chain, switchNetworkAsync, sendTransactionAsync } = useCreatePoll();
+  const {
+    successModalVisible,
+    setSuccessModalVisible,
+    pollId,
+    setPollId,
+    chain,
+    switchNetworkAsync,
+    sendTransactionAsync,
+  } = useCreatePoll();
+
+  const [submitting, setSubmitting] = useState<boolean>(false); // TODO: Use formik context instead
 
   async function onSubmit(
     values: CreatePollValues,
     { resetForm }: FormikHelpers<CreatePollValues>
   ) {
     try {
+      setSubmitting(true);
       // Switch network to Optimism Goerli, and send transaction
       if (chain?.id !== 420) await switchNetworkAsync?.(420);
       const tx = await sendTransactionAsync?.();
@@ -95,11 +105,13 @@ export default function CreatePoll() {
       });
       const data = await resp.json();
 
-      alert(JSON.stringify(data, null, 2));
       resetForm({
         values: initialValues,
         isSubmitting: false,
       });
+      setPollId(data.id);
+      setSubmitting(false);
+      setSuccessModalVisible(true);
     } catch (err) {
       console.error(err);
     }
@@ -119,10 +131,20 @@ export default function CreatePoll() {
         </div>
 
         <div>
+          <SubmittingModal
+            visible={submitting}
+            // onClose={() => setSubmitting(false)}
+          />
+          <SuccessModal
+            pollId={pollId}
+            visible={successModalVisible}
+            onClose={() => setSuccessModalVisible(false)}
+          />
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            initialStatus="empty"
           >
             <Form>
               <PollOption fieldName="caption" fieldValue="Caption" />

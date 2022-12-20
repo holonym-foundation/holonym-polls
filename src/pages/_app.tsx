@@ -9,6 +9,7 @@ import {
 } from "wagmi";
 import { optimism, optimismGoerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import Modal from "react-modal";
 import styles from "../styles/Home.module.css";
 import SiteHead from "components/SiteHead";
 import Navbar from "components/Navbar";
@@ -24,13 +25,14 @@ const wagmiClient = createClient({
   provider,
 });
 
+Modal.setAppElement("#__next");
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
       <SiteHead />
       <main className={styles.main}>
         <Navbar />
-
         <Component {...pageProps} />
         <Footer />
       </main>
