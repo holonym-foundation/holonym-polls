@@ -210,6 +210,34 @@
         "0x2A3A52B3335699C4064f5e13907192DE42d89575": 1
       },
       "txHash": "0xa47316c3e860622307826d53bac242388b94c8c64b917ac603746d76b0740784"
+    },
+    {
+      "id": "6d3f82d7-3748-45db-afdf-cbe097fbdaf9",
+      "caption": "Is Earth flat?",
+      "opt1": "Yes, obviously",
+      "opt2": "No, obviously",
+      "opt3": "Probably",
+      "opt4": "Probably not",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "voters": {},
+      "txHash": "0xee7cb95dbf59e329047b889f0df968ad312b47c20b6d169a1b3fa559d744d423"
+    },
+    {
+      "id": "412696c5-418d-4637-a0af-39d6b8b1fdec",
+      "caption": "New poll",
+      "opt1": "Option 1",
+      "opt2": "Option 2",
+      "opt3": "Option 3",
+      "opt4": "Option 4",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "voters": {},
+      "txHash": "0xb35de57a5270c88fb0ec8a0d8f064fcda1165dbbe05c811e286e54cbf72d67c4"
     }
   ]
 }

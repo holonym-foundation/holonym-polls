@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import {
   Formik,
   Form,
@@ -20,7 +21,6 @@ import styles from "../styles/Home.module.css";
 import pageStyles from "../styles/Polls.module.css";
 import Navbar from "../components/Navbar";
 import PollOption from "../components/CreatePoll/PollOption";
-import { useEffect } from "react";
 
 type CreatePollValues = {
   caption: string;
@@ -48,7 +48,7 @@ const validationSchema = Yup.object({
   opt4: Yup.string().max(25, "Must be 25 characters or less").required("Required"),
 });
 
-export default function CreatePoll() {
+function useCreatePoll() {
   const { chain } = useNetwork();
   const { switchNetworkAsync } = useSwitchNetwork();
   const { config } = usePrepareSendTransaction({
@@ -56,11 +56,20 @@ export default function CreatePoll() {
     request: {
       chainId: 420,
       to: "0xc8834c1fcf0df6623fc8c8ed25064a4148d99388",
-      value: ethers.constants.WeiPerEther.div(1000000),
+      value: ethers.constants.WeiPerEther.div(1000000), // TODO: change `1000000` to `1200` for production
     },
   });
-  const { data, isLoading, isSuccess, sendTransactionAsync } =
-    useSendTransaction(config);
+  const { sendTransactionAsync } = useSendTransaction(config);
+
+  return {
+    chain,
+    switchNetworkAsync,
+    sendTransactionAsync,
+  };
+}
+
+export default function CreatePoll() {
+  const { chain, switchNetworkAsync, sendTransactionAsync } = useCreatePoll();
 
   async function onSubmit(
     values: CreatePollValues,
@@ -68,14 +77,11 @@ export default function CreatePoll() {
   ) {
     try {
       // Switch network to Optimism Goerli, and send transaction
-      if (chain?.id !== 420) {
-        console.log("switching network to 420");
-        await switchNetworkAsync?.(420);
-      }
+      if (chain?.id !== 420) await switchNetworkAsync?.(420);
       const tx = await sendTransactionAsync?.();
-      console.log("waiting for tx", tx);
       await tx?.wait();
       if (!tx) return alert('Transaction failed. Please try again."');
+      // Create poll by sending POST request
       const resp = await fetch("http://localhost:3000/api/polls", {
         method: "POST",
         headers: {
