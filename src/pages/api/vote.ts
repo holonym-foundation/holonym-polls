@@ -1,6 +1,7 @@
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
 import { ethers } from "ethers";
 import type { Poll } from "../../types/base";
 import { LowSync, JSONFileSync } from "lowdb";
@@ -33,6 +34,13 @@ export default async function handler(
     if (signer !== address) {
       console.log("Invalid signature", signer, address);
       return res.status(400).json({ error: "Invalid signature" });
+    }
+    const resp = await axios.get(
+      `https://api.holonym.io/sybil-resistance/gov-id/optimism?user=${address}&action-id=123456789`
+    );
+    const sybilResult = resp.data;
+    if (!sybilResult?.result) {
+      return res.status(400).json({ error: "User has not proven uniqueness" });
     }
 
     await db.read();

@@ -12,6 +12,7 @@ TODO:
 - Double check Yup form validation to make sure it's accurate
   - In Yup validation for create-poll, make sure each option is unique
   - Trim trailing whitespace when form is submitted
+- Before deploying to production, switch from local JSON file to MongoDB
 - Change Poll schema. Instead of using "opt1", "opt2", etc., use an array, like the
   following. Then use index to determine option number.
 
