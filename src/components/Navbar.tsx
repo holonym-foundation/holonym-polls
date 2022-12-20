@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HolonymLogo from "img/Holonym-Logo-W.png";
 import styles from "../styles/Home.module.css";
-import SiweButton from "./SiweButton";
+import LoginButton from "./ConnectWalletButton";
 
 export default function Navbar() {
   return (
@@ -21,7 +21,7 @@ export default function Navbar() {
             <Image src={HolonymLogo} alt="Holonym Logo" width={120} priority />
           </a>
         </div>
-        <SiweButton />
+        <LoginButton />
       </div>
     </>
   );

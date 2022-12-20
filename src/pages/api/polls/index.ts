@@ -3,9 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { LowSync, JSONFileSync } from "lowdb";
+import { ethers } from "ethers";
 import { v4 as uuidv4 } from "uuid";
 import sanitizeHtml from "sanitize-html";
 import type { Poll } from "../../../types/base";
+import { provider } from "api-shared/init";
 import { MAX_CAPTION_LENGTH, MAX_OPTION_STR_LENGTH } from "constants/misc";
 
 type Error = {
@@ -18,6 +20,32 @@ const file = join(__dirname, "../../../data/db.json");
 // Configure lowdb to write to JSONFile
 const db = new LowSync(new JSONFileSync<{ polls: any[] }>(file));
 
+async function validateTx(txHash: string, polls: Poll[]) {
+  try {
+    const pollWithSameTxHash = polls.find((p) => p.txHash === txHash.toLowerCase());
+    if (pollWithSameTxHash) {
+      return { error: "Invalid transaction. Transaction has already been used." };
+    }
+    const tx = await provider.getTransaction(txHash);
+    const requiredValue =
+      process.env.NODE_ENV === "development"
+        ? ethers.constants.WeiPerEther.div(10000000)
+        : ethers.constants.WeiPerEther;
+    if (tx?.to?.toLowerCase() !== process.env.THIS_ADDRESS) {
+      return { error: `Invalid transaction. tx.to !== ${process.env.THIS_ADDRESS}` };
+    }
+    if (!tx?.value || tx.value.lt(requiredValue)) {
+      return { error: `Invalid transaction. tx.value < ${requiredValue}` };
+    }
+    if (!tx?.confirmations) {
+      return { error: "Invalid transaction. Insufficient number of confirmations" };
+    }
+  } catch (err) {
+    console.log(err);
+    return { error: "An error occurred while validating the transaction" };
+  }
+}
+
 async function createPoll(
   req: NextApiRequest,
   res: NextApiResponse<Poll | Poll[] | Error>
@@ -28,8 +56,13 @@ async function createPoll(
     return res.status(500).json({ error: "Database is unexpectedly empty" });
   }
 
-  const { caption, opt1, opt2, opt3, opt4 } = req.body;
-  if (caption && opt1 && opt2 && opt3 && opt4) {
+  const { caption, opt1, opt2, opt3, opt4, txHash } = req.body;
+  if (caption && opt1 && opt2 && opt3 && opt4 && txHash) {
+    const txValidationResult = await validateTx(txHash, db.data.polls);
+    if (txValidationResult?.error) {
+      return res.status(400).json({ error: txValidationResult.error });
+    }
+
     const sanitizedCaption = sanitizeHtml(caption);
     const sanitizedOpt1 = sanitizeHtml(opt1);
     const sanitizedOpt2 = sanitizeHtml(opt2);
@@ -61,6 +94,7 @@ async function createPoll(
       opt3Total: 0,
       opt4Total: 0,
       voters: {},
+      txHash: txHash.toLowerCase(),
     };
     db.data.polls.push(newPoll);
     await db.write();
@@ -83,16 +117,3 @@ export default async function handler(
     res.status(400).json({ error: "Invalid request method" });
   }
 }
-
-// const assertSignerIsAddress = async (message, signature, address) => {
-//   if (!signature || !address) return false;
-//   const msgHash = web3.utils.sha3(message);
-//   let signer;
-//   try {
-//     signer = ethers.utils.recoverAddress(msgHash, signature).toLowerCase();
-//   } catch (err) {
-//     console.log(err);
-//     console.log("Malformed signature");
-//   }
-//   return signer.toLowerCase() == address.toLowerCase();
-// };

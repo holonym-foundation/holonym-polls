@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import styles from "../styles/Home.module.css";
 import Navbar from "../components/Navbar";
 import Footer from "components/Footer";
@@ -13,7 +12,6 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       polls,
-      csrfToken: await getCsrfToken(context),
     },
   };
 }
@@ -35,16 +33,18 @@ export default function Home({ polls }: { polls: Poll[] }) {
         </div>
 
         <div className={styles.grid}>
-          {polls.map((pollData) => (
-            <Link
-              key={pollData.id}
-              href={`/polls/${pollData.id}`}
-              className={styles.card}
-              rel="noopener noreferrer"
-            >
-              <h3>{pollData.caption}</h3>
-            </Link>
-          ))}
+          {polls?.length > 0
+            ? polls.map((pollData) => (
+                <Link
+                  key={pollData.id}
+                  href={`/polls/${pollData.id}`}
+                  className={styles.card}
+                  rel="noopener noreferrer"
+                >
+                  <h3>{pollData.caption}</h3>
+                </Link>
+              ))
+            : null}
         </div>
 
         <hr style={{ opacity: "0.3" }} />

@@ -23,6 +23,7 @@ export default function PollOption({ fieldName, fieldValue }: PollOptionProps) {
             className={`${styles["text-input-create-poll"]} text-field`}
             id={fieldName}
             type="text"
+            autoComplete="off"
             {...field}
             // value={field.value}
           />

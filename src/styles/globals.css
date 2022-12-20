@@ -157,8 +157,6 @@ button:hover {
   /* Style the button container */
   display: inline-block;
   border-radius: 4px;
-  /* border: 1px solid #0070c9;
-  background-color: #0070c9; */
   border: 1px solid #e6e6fa;
   background-color: #e6e6fa;
   /* color: #fff; */
@@ -169,22 +167,16 @@ button:hover {
   transition: all 0.2s ease-in-out;
 }
 .poll-button:hover {
-  /* background-color: #0056a3;
-  border-color: #0056a3; */
   background-color: #c6c0da;
   border-color: #c6c0da;
 }
 /* Style the active state */
 .poll-button:active {
-  /* background-color: #003683;
-  border-color: #003683; */
   background-color: #a6a0ba;
   border-color: #a6a0ba;
   transform: scale(0.95);
 }
 .poll-button-selected {
-  /* background-color: #003683;
-  border-color: #003683; */
   background-color: #a6a0ba;
   border-color: #a6a0ba;
   transform: scale(0.95);

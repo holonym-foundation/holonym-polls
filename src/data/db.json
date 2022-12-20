@@ -46,11 +46,13 @@
       "opt2": "No",
       "opt3": "Sometimes",
       "opt4": "I don't know",
-      "opt1Total": 0,
+      "opt1Total": 1,
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
-      "voters": {}
+      "voters": {
+        "0x123": 1
+      }
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a04",
@@ -62,8 +64,10 @@
       "opt1Total": 0,
       "opt2Total": 0,
       "opt3Total": 0,
-      "opt4Total": 0,
-      "voters": {}
+      "opt4Total": 1,
+      "voters": {
+        "0x123": 4
+      }
     },
     {
       "id": "6cd35d1c-12e7-4794-a329-200bb5168a05",
@@ -128,11 +132,84 @@
       "opt2": "No",
       "opt3": "Sometimes",
       "opt4": "I don't know",
+      "opt1Total": 1,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "voters": {
+        "0xdbd6b2c02338919EdAa192F5b60F5e5840A50079": 1
+      }
+    },
+    {
+      "id": "3360ffae-a90d-4066-bb59-3bdda96d2966",
+      "caption": "asdf",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "This is a funny option",
+      "opt4": "I don't know",
       "opt1Total": 0,
       "opt2Total": 0,
       "opt3Total": 0,
       "opt4Total": 0,
       "voters": {}
+    },
+    {
+      "id": "c1c46904-fb8e-4075-ae79-1da61f0742b1",
+      "caption": "Caption",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Maybe",
+      "opt4": "idk",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "voters": {},
+      "txHash": "0x680373d74807f2ebb13e7cb85eaed47203267391b0b4b6c5b98e7fb44c0d85ad"
+    },
+    {
+      "id": "22195242-e24d-486b-a98b-154ae7b999f0",
+      "caption": "Caption",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Maybe",
+      "opt4": "YES DEFINITELY",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "voters": {},
+      "txHash": "0x680373d74807f2ebb13e7cb85eaed47203267391b0b4b6c5b98e7fb44c0d85ad"
+    },
+    {
+      "id": "8b60f1bf-0eeb-49a1-85be-a7eda2f33adc",
+      "caption": "Caption",
+      "opt1": "Yes",
+      "opt2": "Maybe",
+      "opt3": "No",
+      "opt4": "DEFINITELY",
+      "opt1Total": 0,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "voters": {},
+      "txHash": "0x680373d74807f2ebb13e7cb85eaed47203267391b0b4b6c5b98e7fb44c0d85ad"
+    },
+    {
+      "id": "aac3f83d-22f8-4d58-b22c-440f7c29be2f",
+      "caption": "Caption",
+      "opt1": "Yes",
+      "opt2": "No",
+      "opt3": "Maybe",
+      "opt4": "idk",
+      "opt1Total": 1,
+      "opt2Total": 0,
+      "opt3Total": 0,
+      "opt4Total": 0,
+      "voters": {
+        "0x2A3A52B3335699C4064f5e13907192DE42d89575": 1
+      },
+      "txHash": "0xa47316c3e860622307826d53bac242388b94c8c64b917ac603746d76b0740784"
     }
   ]
 }

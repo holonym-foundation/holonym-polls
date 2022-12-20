@@ -1,6 +1,7 @@
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { ethers } from "ethers";
 import type { Poll } from "../../types/base";
 import { LowSync, JSONFileSync } from "lowdb";
 
@@ -28,8 +29,11 @@ export default async function handler(
   }
   const { id, option, address, signature }: VoteBody = req.body;
   if (id && option && address && signature) {
-    // TODO: Handle SIWE auth
-    // if signature not from address: return error
+    const signer = ethers.utils.verifyMessage(id, signature);
+    if (signer !== address) {
+      console.log("Invalid signature", signer, address);
+      return res.status(400).json({ error: "Invalid signature" });
+    }
 
     await db.read();
     if (!db.data?.polls) {

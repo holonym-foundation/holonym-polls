@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Formik, Form, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
+import { useAccount, useSignMessage } from "wagmi";
 import styles from "../../styles/Home.module.css";
 import pageStyles from "../../styles/Polls.module.css";
 import type { Poll } from "../../types/base";
@@ -60,11 +61,18 @@ export default function Poll({ poll }: { poll: Poll }) {
     router.replace(router.asPath);
     console.log("refreshed");
   };
+  const { address } = useAccount();
+  const { signMessageAsync } = useSignMessage({
+    message: poll.id,
+    onError: (err) => console.log(err),
+  });
 
   async function onSubmit(
     values: PollValues,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) {
+    if (!address) return alert("Please connect your wallet first");
+    const signature = await signMessageAsync({ message: poll.id });
     const optNameToNum = Object.fromEntries(
       Object.entries(poll)
         .filter((item) => item[0].includes("opt"))
@@ -75,8 +83,8 @@ export default function Poll({ poll }: { poll: Poll }) {
     const reqBody = {
       id: poll.id,
       option: vote,
-      address: "0x123",
-      signature: "0x456",
+      address: address,
+      signature: signature,
     };
     const resp = await fetch("http://localhost:3000/api/vote", {
       method: "POST",

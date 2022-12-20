@@ -1,11 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Formik, Form, Field, useField, useFormikContext } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  useField,
+  useFormikContext,
+  FormikHelpers,
+} from "formik";
 import * as Yup from "yup";
+import { ethers } from "ethers";
+import {
+  useNetwork,
+  useSwitchNetwork,
+  useSendTransaction,
+  usePrepareSendTransaction,
+} from "wagmi";
 import styles from "../styles/Home.module.css";
 import pageStyles from "../styles/Polls.module.css";
 import Navbar from "../components/Navbar";
 import PollOption from "../components/CreatePoll/PollOption";
+import { useEffect } from "react";
 
 type CreatePollValues = {
   caption: string;
@@ -15,7 +30,7 @@ type CreatePollValues = {
   opt4: string;
 };
 
-const initialValues = {
+const initialValues: CreatePollValues = {
   caption: "",
   opt1: "",
   opt2: "",
@@ -34,29 +49,61 @@ const validationSchema = Yup.object({
 });
 
 export default function CreatePoll() {
+  const { chain } = useNetwork();
+  const { switchNetworkAsync } = useSwitchNetwork();
+  const { config } = usePrepareSendTransaction({
+    chainId: 420,
+    request: {
+      chainId: 420,
+      to: "0xc8834c1fcf0df6623fc8c8ed25064a4148d99388",
+      value: ethers.constants.WeiPerEther.div(1000000),
+    },
+  });
+  const { data, isLoading, isSuccess, sendTransactionAsync } =
+    useSendTransaction(config);
+
   async function onSubmit(
     values: CreatePollValues,
-    {
-      setSubmitting,
-      resetForm,
-    }: {
-      setSubmitting: (isSubmitting: boolean) => void;
-      resetForm: (nextState: CreatePollValues) => void;
-    }
+    { resetForm }: FormikHelpers<CreatePollValues>
   ) {
-    const resp = await fetch("http://localhost:3000/api/polls", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-    const data = await resp.json();
+    try {
+      // Switch network to Optimism Goerli, and send transaction
+      if (chain?.id !== 420) {
+        console.log("switching network to 420");
+        await switchNetworkAsync?.(420);
+      }
+      const tx = await sendTransactionAsync?.();
+      console.log("waiting for tx", tx);
+      await tx?.wait();
+      if (!tx) return alert('Transaction failed. Please try again."');
+      const resp = await fetch("http://localhost:3000/api/polls", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...values,
+          // txHash: "0x680373d74807f2ebb13e7cb85eaed47203267391b0b4b6c5b98e7fb44c0d85ad",
+          txHash: tx.hash,
+        }),
+      });
+      const data = await resp.json();
 
-    alert(JSON.stringify(data, null, 2));
-    setSubmitting(false);
-    resetForm(initialValues);
+      alert(JSON.stringify(data, null, 2));
+      resetForm({
+        values: initialValues,
+        isSubmitting: false,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
+
+  useEffect(() => {
+    if (chain?.id !== 420 && switchNetworkAsync) {
+      switchNetworkAsync(420);
+    }
+  }, [chain?.id, switchNetworkAsync]);
 
   return (
     <>

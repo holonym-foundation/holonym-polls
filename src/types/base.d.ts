@@ -15,4 +15,5 @@ export type Poll = {
   opt3Total: number;
   opt4Total: number;
   voters: AddressToVote;
+  txHash: string;
 };

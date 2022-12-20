@@ -6,9 +6,11 @@ Demo app showcasing how Holonym can be used for Sybil-resistant polls.
 
 TODO:
 
+- Handle user switching accounts in wallet
 - Add check for whether user is unique (using holonym-api)
-- Add payments. In order to create a poll, user must pay $1.
-- Display success message modal with link to poll once poll is submitted
+- In create-poll, display success message modal with link to poll once poll is submitted
+- In create-poll, display error message modal if poll submission fails
+- In create-poll, display loading message while transaction is being processed
 - Double check Yup form validation to make sure it's accurate
 - Change Poll schema. Instead of using "opt1", "opt2", etc., use an array, like the
   following. Then use index to determine option number.
